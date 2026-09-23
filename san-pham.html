@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sản Phẩm - Mỹ Phẩm</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #FBFBFB;
+    }
+
+    /* ─── TOP ACCENT LINE ─── */
+    .top-accent {
+      width: 100%;
+      height: 4px;
+      background: #EF939E;
+    }
+
+    /* ─── WRAPPER ─── */
+    .wrapper {
+      width: 100%;
+    }
+
+    /* ─── MAIN GRID ─── */
+    .shop {
+      display: grid;
+      grid-template-columns: 20% 16.8% 16.8% 16.8% 29.6%;
+      grid-template-rows: 289px 291px;
+      border: 1px solid #E8E8E8;
+      background: #fff;
+      width: 100%;
+    }
+
+    /* ─── SIDEBAR ─── */
+    .sidebar {
+      grid-column: 1;
+      grid-row: 1 / 3;
+      border-right: 1px solid #E8E8E8;
+    }
+
+    .sidebar-header {
+      height: 75px;
+      display: flex;
+      align-items: center;
+      padding-left: 20px;
+      gap: 16px;
+      border-bottom: 1px solid #E8E8E8;
+    }
+
+    .heart-icon {
+      width: 44px;
+      height: 44px;
+      background: #EF939E;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .heart-icon svg { fill: #fff; }
+
+    .sidebar-title {
+      font-size: 15px;
+      font-weight: 400;
+      color: #595959;
+      letter-spacing: 0.5px;
+    }
+
+    .menu { list-style: none; }
+
+    .menu li { border-bottom: 1px solid #E8E8E8; }
+
+    .menu li a {
+      display: block;
+      height: 41px;
+      line-height: 41px;
+      padding-left: 30px;
+      font-size: 14px;
+      color: #333;
+      text-decoration: none;
+    }
+
+    .menu li a:hover { color: #EF939E; }
+
+    .menu li.active a {
+      background: #EF939E;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* ─── PRODUCT CARD ─── */
+    .product-card {
+      position: relative;
+      border-right: 1px solid #E8E8E8;
+      border-bottom: 1px solid #E8E8E8;
+      background: #fff;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card:hover { background: #fffafa; }
+
+    .product-img {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .product-img img {
+      max-width: 100%;
+      max-height: 160px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .product-info {
+      padding: 0 20px 20px 20px;
+    }
+
+    .product-name {
+      font-size: 14px;
+      color: #595959;
+      margin-bottom: 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .product-price {
+      display: flex;
+      align-items: baseline;
+      gap: 7px;
+    }
+
+    .price-new {
+      font-size: 15px;
+      font-weight: 600;
+      color: #6F8BCC;
+    }
+
+    .price-old {
+      font-size: 13px;
+      color: #C8C8C8;
+      text-decoration: line-through;
+    }
+
+    /* ─── BADGE ─── */
+    .badge {
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      width: 44px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 500;
+      color: #fff;
+      z-index: 2;
+    }
+
+    .badge-sale { background: #F23434; }
+    .badge-hot  { background: #FF5722; }
+
+    /* ─── BANNER ─── */
+    .banner {
+      grid-column: 5;
+      grid-row: 1 / 3;
+      padding: 20px;
+      border-left: 1px solid #E8E8E8;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .banner img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .banner-text {
+      position: absolute;
+      bottom: 60px;
+      right: 36px;
+      text-align: right;
+    }
+
+    .banner-text .b-title {
+      font-size: 30px;
+      font-style: italic;
+      font-family: Georgia, 'Times New Roman', serif;
+      color: #fff;
+      font-weight: 700;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    }
+
+    .banner-text .b-sub {
+      font-size: 14px;
+      font-weight: 300;
+      color: #fff;
+      letter-spacing: 2px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+
+    /* ─── LOGO PARTNERS ─── */
+    .partners {
+      width: 100%;
+      padding: 30px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #FBFBFB;
+    }
+
+    .partners img {
+      height: 70px;
+      object-fit: contain;
+      filter: grayscale(100%);
+      opacity: 0.8;
+      transition: all 0.3s;
+    }
+
+    .partners img:hover {
+      filter: grayscale(0%);
+      opacity: 1;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      text-align: center;
+      padding: 16px;
+      font-size: 12px;
+      color: #999;
+      border-top: 1px solid #eee;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP ACCENT -->
+  <div class="top-accent"></div>
+
+  <div class="wrapper">
+
+    <!-- MAIN SHOP GRID -->
+    <div class="shop">
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="heart-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+                       2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09
+                       C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5
+                       c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </div>
+          <span class="sidebar-title">MỸ PHẨM</span>
+        </div>
+        <ul class="menu">
+          <li class="active"><a href="#">Tất cả</a></li>
+          <li><a href="#">Kem dưỡng ẩm</a></li>
+          <li><a href="#">Son môi</a></li>
+          <li><a href="#">Sơn móng tay</a></li>
+          <li><a href="#">Trang điểm</a></li>
+          <li><a href="#">Dưỡng tóc</a></li>
+        </ul>
+      </aside>
+
+      <!-- PRODUCT 1: chai vàng = pr23 -->
+      <div class="product-card">
+        <span class="badge badge-sale">-17%</span>
+        <div class="product-img">
+          <img src="ảnh/Images/Images/products/pr23_d88c715b-a920-42e1-613e-7d7ba1317762_master.jpg" alt="Son môi itachi" />
+        </div>
+        <div class="product-info">
+          <p class="product-name">Son môi itachi</p>
+          <div class="product-price">
+            <span class="price-new">500.000đ</span>
+            <span class="price-old">600.000đ</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCT 2: mascara = pr9 -->
+      <div class="product-card">
+        <span class="badge badge-sale">-50%</span>
+        <div class="product-img">
+          <img src="ảnh/Images/Images/products/pr9_80450716-2b66-4b4b-76ed-5c1534a804fa_master.jpg" alt="Mascara dày và cong" />
+        </div>
+        <div class="product-info">
+          <p class="product-name">Mascara dày và cong</p>
+          <div class="product-price">
+            <span class="price-new">50.000đ</span>
+            <span class="price-old">100.000đ</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCT 3: hộp TPA = pr10 -->
+      <div class="product-card">
+        <span class="badge badge-sale">-50%</span>
+        <div class="product-img">
+          <img src="ảnh/Images/Images/products/pr10_18fd8cae-14f6-4d70-40b5-5fde4db1df12_master.jpg" alt="Son môi TPA-115" />
+        </div>
+        <div class="product-info">
+          <p class="product-name">Son môi TPA-115</p>
+          <div class="product-price">
+            <span class="price-new">125.000đ</span>
+            <span class="price-old">250.000đ</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCT 4: son bóng hồng = pr12 -->
+      <div class="product-card">
+        <span class="badge badge-sale">-50%</span>
+        <div class="product-img">
+          <img src="ảnh/Images/Images/products/pr12_6e6ab775-622b-43ae-43c9-08796dd0c9e2_master.jpg" alt="Son bóng hồng" />
+        </div>
+        <div class="product-info">
+          <p class="product-name">Son bóng hồng</p>
+          <div class="product-price">
+            <span class="price-new">100.000đ</span>
+            <span class="price-old">200.000đ</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCT 5: chai Burberry = pr8 -->
+      <div class="product-card">
+        <span class="badge badge-hot">HOT</span>
+        <div class="product-img">
+          <img src="ảnh/Images/Images/products/pr8_master.jpg" alt="Nước làm trắng da SG" />
+        </div>
+        <div class="product-info">
+          <p class="product-name">Nước làm trắng da SG</p>
+          <div class="product-price">
+            <span class="price-new">200.000đ</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCT 6: phấn má = pr11 -->
+      <div class="product-card">
+        <span class="badge badge-sale">-11%</span>
+        <div class="product-img">
+          <img src="ảnh/Images/Images/products/pr11_40e951b1-7be3-4f65-4bb8-fc9c1902e6d1_master.jpg" alt="Phấn trang điểm AUG" />
+        </div>
+        <div class="product-info">
+          <p class="product-name">Phấn trang điểm AUG</p>
+          <div class="product-price">
+            <span class="price-new">400.000đ</span>
+            <span class="price-old">450.000đ</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BANNER -->
+      <aside class="banner">
+        <img src="ảnh/Images/Images/tabs_2_slider_img_3.jpg" alt="Cosmetics" />
+        <div class="banner-text">
+          <p class="b-title">Cosmetics</p>
+          <p class="b-sub">Nature Products</p>
+        </div>
+      </aside>
+
+    </div>
+    <!-- END SHOP GRID -->
+
+  </div>
+
+  <!-- PARTNERS -->
+  <div class="partners">
+    <img src="ảnh/Images/Images/partner_img_1.png" alt="Partner 1" />
+    <img src="ảnh/Images/Images/partner_img_2.png" alt="Partner 2" />
+    <img src="ảnh/Images/Images/partner_img_3.png" alt="Partner 3" />
+    <img src="ảnh/Images/Images/partner_img_4.png" alt="Partner 4" />
+    <img src="ảnh/Images/Images/partner_img_5.png" alt="Partner 5" />
+    <img src="ảnh/Images/Images/partner_img_6.png" alt="Partner 6" />
+    <img src="ảnh/Images/Images/partner_img_7.png" alt="Partner 7" />
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2026 Mỹ Phẩm Shop. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
